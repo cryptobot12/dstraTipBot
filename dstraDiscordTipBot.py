@@ -16,8 +16,8 @@ BOTNAME  = 'Tip-Bot'
 BOTUUID  = '7931'
 BOTCHID  = '439266690795044874'
 TOKEN    = 'NDQxMDM5NDE2OTY2Nzc0Nzk0.DcqfNw.mws7x19BrPmZRGSd7d1TC3mKbws'
-LOG_FILE = 'dstra'
-APP_EXE  = 'dstra-qt'
+LOG_FILE = '/tmp/dstra.log'
+APP_EXE  = '/path/to/the/wallet/dstra-cli'
 
 ''' end configuration section '''
 
