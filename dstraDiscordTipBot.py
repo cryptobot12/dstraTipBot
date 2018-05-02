@@ -13,7 +13,7 @@ import time
 ''' begin configuration section '''
 
 BOTNAME  = 'Tip-Bot'
-BOTUUID  = '7931'
+BOTUUID  = '#7931'
 BOTCHID  = '439266690795044874'
 TOKEN    = 'NDQxMDM5NDE2OTY2Nzc0Nzk0.DcqfNw.mws7x19BrPmZRGSd7d1TC3mKbws'
 LOG_FILE = '/tmp/dstra.log'
