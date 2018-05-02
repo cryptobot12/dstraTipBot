@@ -8,7 +8,7 @@ sudo apt-get install git
 
 ## Install:
 ```bash
-git clone https://github.com/loremz/dstraTipBot
+git clone https://github.com/loremzlimpa/dstraTipBot
 bash ~/dstraTipBot/install.sh
 ```
 
