@@ -13,11 +13,11 @@ import time
 ''' begin configuration section '''
 
 BOTNAME  = 'Tip-Bot'
-BOTUUID  = '7931'
+BOTUUID  = '#7931'
 BOTCHID  = '439266690795044874'
 TOKEN    = 'NDQxMDM5NDE2OTY2Nzc0Nzk0.DcqfNw.mws7x19BrPmZRGSd7d1TC3mKbws'
 LOG_FILE = '/tmp/dstra.log'
-APP_EXE  = '/home/ubuntu/dstra1.2.5/dstrad'
+APP_EXE  = '/path/to/the/wallet/dstra-cli'
 
 ''' end configuration section '''
 
@@ -136,7 +136,7 @@ async def balance(ctx):
     balance = float(ret)
     balance = str('{:,.8f}'.format(balance))
 
-    msg = '@{0} your current balance is: {1} DSTRA'.format(user_name, balance)
+    msg = '@{0} **Balance**: {1} DSTRA'.format(user_name, balance)
     embed = discord.Embed(color=discord.Color.green())
     embed.add_field(name="BALANCE", value=msg, inline=True)
 
@@ -177,7 +177,7 @@ async def deposit(ctx):
         await bot.say(embed=embed)
         return False
 
-    msg = '@{} your depositing address is: {}'.format(user_name, ret)
+    msg = '@{} **Wallet**: {}'.format(user_name, ret)
     embed = discord.Embed(color=discord.Color.green())
     embed.add_field(name="DEPOSIT", value=msg, inline=True)
 
@@ -204,14 +204,14 @@ async def tip(ctx):
     
     message = ctx.message.content.split(' ')
     if len(message) != 3:
-        msg = "Please use !tip <username> <amount>!"
+        msg = "Please use !tip <username> <amount>"
         embed = discord.Embed(color=discord.Color.red())
         embed.add_field(name="ERROR", value=msg, inline=True)
         await bot.say(embed=embed)
         return False
 
     if not isValidUsername(message[1]):
-        msg = "Please input a valid username (ex: @JonDoe01#0964)!"
+        msg = "Please input a valid username (ex: @Larva#4374)!"
         embed = discord.Embed(color=discord.Color.red())
         embed.add_field(name="ERROR", value=msg, inline=True)
         await bot.say(embed=embed)
@@ -228,7 +228,7 @@ async def tip(ctx):
     uuid = list(filter(str.isdigit, target))
     target_uuid = str(''.join(uuid))
 
-    if amount > 100000 or amount < 1:
+    if amount > 100000 or amount < 0.01:
         msg = "Please send value between 1 and 100,000 DSTRA!"
         embed = discord.Embed(color=discord.Color.red())
         embed.add_field(name="ERROR", value=msg, inline=True)
@@ -242,7 +242,7 @@ async def tip(ctx):
         return False
     if target_uuid == BOTUUID:
         embed = discord.Embed(color=discord.Color.red())
-        embed.add_field(name="ERROR", value="HODL.", inline=True)
+        embed.add_field(name="ERROR", value="HODL", inline=True)
         await bot.say(embed=embed)
         return False
     if not target_uuid:
@@ -270,7 +270,7 @@ async def tip(ctx):
     balance = float(ret)
 
     if balance < amount:
-        msg = '@{0} you have insufficent funds.'.format(user_name)
+        msg = '@{0} Insufficent funds.'.format(user_name)
         embed = discord.Embed(color=discord.Color.red())
         embed.add_field(name="ERROR", value=msg, inline=True)
         await bot.say(embed=embed)
@@ -293,7 +293,7 @@ async def tip(ctx):
         await bot.say(embed=embed)
         return False
 
-    msg = '@{0} tipped {1} of {2} DSTRA'.format(user_name, target, amount)
+    msg = '@{0} **Tipped** {1} {2} **DST**'.format(user_name, target, amount)
     embed = discord.Embed(color=discord.Color.green())
     embed.add_field(name="TIP", value=msg, inline=True)
 
@@ -320,7 +320,7 @@ async def rain(ctx):
     
     message = ctx.message.content.split(' ')
     if len(message) != 2:
-        msg = "Please use !rain <amount>!"
+        msg = "Please use !rain <amount>"
         embed = discord.Embed(color=discord.Color.red())
         embed.add_field(name="ERROR", value=msg, inline=True)
         await bot.say(embed=embed)
@@ -334,7 +334,7 @@ async def rain(ctx):
 
     amount = float(message[1])
 
-    if amount > 100000 or amount < 1:
+    if amount > 100000 or amount < 0.01:
         msg = "Please send value between 1 and 100,000 DSTRA!"
         embed = discord.Embed(color=discord.Color.red())
         embed.add_field(name="ERROR", value=msg, inline=True)
@@ -359,9 +359,9 @@ async def rain(ctx):
     balance = float(ret)
 
     if balance < amount:
-        msg = '@{0} you have insufficent funds.'.format(user_name)
+        msg = '@{0} Insufficent funds.'.format(user_name)
         embed = discord.Embed(color=discord.Color.red())
-        embed.add_field(name="ERROR", value=msg, inline=True)
+        embed.add_field(name="Insufficent", value=msg, inline=True)
         await bot.say(embed=embed)
         return False
 
@@ -389,7 +389,7 @@ async def rain(ctx):
       ]
       tx = rpc_call(cmd)
       if tx is None:
-          msg = "failed to #tip @{}!".format(target_name)
+          msg = "Failed to #tip @{}!".format(target_name)
           embed = discord.Embed(color=discord.Color.red())
           embed.add_field(name="ERROR", value=msg, inline=True)
           await bot.say(embed=embed)
@@ -424,7 +424,7 @@ async def withdraw(ctx):
 
     message = ctx.message.content.split(' ')
     if len(message) != 3:
-        msg = 'Please use !withdraw <address> <amount>!'
+        msg = 'Please use !withdraw <address> <amount>'
         embed = discord.Embed(color=discord.Color.red())
         embed.add_field(name="ERROR", value=msg, inline=True)
         await bot.say(embed=embed)
@@ -463,9 +463,9 @@ async def withdraw(ctx):
 
     balance = float(ret)
     if balance < amount+1:
-        msg = '@{0} you have insufficent funds.'.format(user_name)
+        msg = '@{0} Insufficent funds.'.format(user_name)
         embed = discord.Embed(color=discord.Color.red())
-        embed.add_field(name="ERROR", value=msg, inline=True)
+        embed.add_field(name="Insufficent", value=msg, inline=True)
         await bot.say(embed=embed)
         return False
 
@@ -486,7 +486,7 @@ async def withdraw(ctx):
         await bot.say(embed=embed)
         return False
 
-    msg = '@{0} has successfully withdrew {2} DSTRA to address: {1}'\
+    msg = '@{0} **Withdraw** {2} DST to: {1}'\
               .format(user_name, address, amount)
     embed = discord.Embed(color=discord.Color.green())
     embed.add_field(name="WITHDRAW", value=msg, inline=True)
